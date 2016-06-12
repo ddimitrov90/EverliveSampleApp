@@ -1,0 +1,24 @@
+PODS:
+  - Alamofire (3.4.0)
+  - EverliveSDK (1.0.2):
+    - Alamofire (~> 3.0)
+    - EVReflection (~> 2.6)
+    - SwiftyJSON (~> 2.3.1)
+  - EVReflection (2.35.0)
+  - Kingfisher (2.4.1)
+  - SwiftyJSON (2.3.2)
+
+DEPENDENCIES:
+  - EverliveSDK (~> 1.0.2)
+  - Kingfisher (~> 2.4)
+
+SPEC CHECKSUMS:
+  Alamofire: c19a627cefd6a95f840401c49ab1f124e07f54ee
+  EverliveSDK: 17accd73a7479afd47e9d10aa5b36fbd4193c576
+  EVReflection: 1a07aa13e279da039b28caf9d9d713d98515baf8
+  Kingfisher: 41aed5b6c1ed8fa98cf6d75283ce89cf7890f517
+  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
+
+PODFILE CHECKSUM: ea53c157a32c05868761f011e67ecb2e67780f90
+
+COCOAPODS: 1.0.0
