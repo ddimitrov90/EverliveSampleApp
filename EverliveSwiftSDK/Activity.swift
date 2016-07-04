@@ -16,6 +16,7 @@ public class Activity : DataItem {
         }
     }
     
+    var Location: GeoPoint?
     var UserId: String?
     var UserProfile: SampleUser?
     var Picture: String?

@@ -76,9 +76,10 @@ class ActivitiesTableViewController: UITableViewController, CellDelegate {
         let cell = tableView.dequeueReusableCellWithIdentifier("activityCell", forIndexPath: indexPath) as! ActivityTableViewCell
         
         let currentActivity = self.activities[indexPath.row]
-        cell.configure(currentActivity)
         cell.delegate = self
         cell.cellIndex = indexPath.row
+        cell.configure(currentActivity)
+        
         return cell
     }
     

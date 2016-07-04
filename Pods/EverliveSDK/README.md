@@ -14,7 +14,7 @@ The features that are covered in the first version:
 - Work with users
 - Work with files
 
-There is a sample application that demonstrates all features in a real case scenario here - 
+There is a [sample application](https://github.com/ddimitrov90/EverliveSampleApp) that demonstrates all features in a real case scenario here.
 
 ## Requirements
 
@@ -37,7 +37,7 @@ end
 ```
 
 ## Issues
-Please bear in mind that I have worked on this in my spare time and there might be some bugs. If you find any, please submit them as issue in the git repo. I'll try to respond as soon as possible. Also if you have problems or need more information on how to achieve something, you can write in the sample app repo or on my email.
+Please bear in mind that I have worked on this in my spare time and there might be some bugs. If you find any, please submit them as issue in the git repo. I'll try to respond as soon as possible. Also if you have problems or need more information on how to achieve something, you can write in the [sample app](https://github.com/ddimitrov90/EverliveSampleApp) repo or on my email.
 
 ## License
 
@@ -262,7 +262,7 @@ Deleting items can be achieved by specifing an Id or deleting all items. The del
 
 ## Expand
 
-Expand of items is supported for all read operations by using the ExpandDefinition class. Be careful with the number of expanded items, because there is currently a limitation of maximum 50 returned items. In order to use the expand, you should have two properties in your class - the field that is defined in your content type as relation and new property that will hold the expand result. Here is an example with the User's definition in the sample app.
+Expand of items is supported for all read operations by using the ExpandDefinition class. Be careful with the number of expanded items, because there is currently a limitation of maximum 50 returned items. In order to use the expand, you should have two properties in your class - the field that is defined in your content type as relation and new property that will hold the expand result. Here is an example with the User's definition in the [sample app](https://github.com/ddimitrov90/EverliveSampleApp).
 
 	class SampleUser: User {
 		var Picture: String?
@@ -426,11 +426,11 @@ There is predefined class for working with Files that corresponds to the Files C
         // all properties are setm including the Data
     }
 
-My advice is not to use this function as it is simply performs a GET request that always downloads the file content, without caching and it may be slow. You better use libraries like [Kingfisher](https://github.com/onevcat/Kingfisher) or  [AlamofireImage](https://github.com/Alamofire/AlamofireImage) that will download the file for you just by providing the file **Uri**. This is demonstrated in the sample application here.
+My advice is not to use this function as it is simply performs a GET request that always downloads the file content, without caching and it may be slow. You better use libraries like [Kingfisher](https://github.com/onevcat/Kingfisher) or  [AlamofireImage](https://github.com/Alamofire/AlamofireImage) that will download the file for you just by providing the file **Uri**. This is demonstrated in the [sample application](https://github.com/ddimitrov90/EverliveSampleApp).
 
 ### Upload
 
-Full demo of the upload functionality by using ImagePicker can be seen in the sample application. But once you have the data of your file, here is the code.
+Full demo of the upload functionality by using ImagePicker can be seen in the [sample application](https://github.com/ddimitrov90/EverliveSampleApp). But once you have the data of your file, here is the code.
 
 	let newFile = File()
     newFile.Filename = "newfile.jpeg"

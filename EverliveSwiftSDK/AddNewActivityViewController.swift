@@ -8,8 +8,13 @@
 
 import UIKit
 import EverliveSDK
+import CoreLocation
 
-class AddNewActivityViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+
+class AddNewActivityViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, CLLocationManagerDelegate {
+    
+    var locationManager: CLLocationManager!
+    var currentLocation: CLLocationCoordinate2D = CLLocationCoordinate2D()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +31,16 @@ class AddNewActivityViewController: UIViewController, UINavigationControllerDele
         self.newActivityText.layer.borderColor = UIColor(red: 212.0/255.0, green: 212.0/255.0, blue: 212.0/255.0, alpha: 0.5).CGColor
         self.newActivityText.layer.borderWidth = 2.0
         self.newActivityText.layer.cornerRadius = 5.0
+        
+        self.locationManager = CLLocationManager()
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.startUpdatingLocation()
+    }
+    
+    func locationManager(manager:CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        self.currentLocation = manager.location!.coordinate
     }
     
     @IBAction func pickImage(sender: UIButton) {
@@ -52,8 +67,12 @@ class AddNewActivityViewController: UIViewController, UINavigationControllerDele
             newActivity.Text = self.newActivityText.text
             newActivity.Picture = newFile.Id
             newActivity.UserId = EverliveSwiftApp.currentUser?.Id
+            newActivity.Location = GeoPoint()
+            newActivity.Location?.Latitude = self.currentLocation.latitude
+            newActivity.Location?.Longitude = self.currentLocation.longitude
             EverliveSwiftApp.sharedInstance.Data().create(newActivity).execute({ (suc:Bool, err:EverliveError?) in
                 Utilities.hideLoading()
+                self.locationManager.stopUpdatingLocation()
                 self.performSegueWithIdentifier("showAllActivities", sender: self)
             })
         }

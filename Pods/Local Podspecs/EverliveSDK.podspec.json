@@ -5,7 +5,7 @@
   },
   "summary": "EverliverSDK lets you take advantage of the features of Progress Backend Services (formerly known as Everlive) when building native applications using Swift.",
   "requires_arc": true,
-  "version": "1.0.0",
+  "version": "1.0.2",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
@@ -16,7 +16,7 @@
   "homepage": "https://github.com/ddimitrov90/EverliveSDK",
   "source": {
     "git": "https://github.com/ddimitrov90/EverliveSDK.git",
-    "tag": "1.0.0"
+    "tag": "1.0.2"
   },
   "frameworks": "UIKit",
   "dependencies": {

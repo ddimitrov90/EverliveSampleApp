@@ -46,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 public class EverliveSwiftApp {
-    static let sharedInstance = EverliveApp(appId: "your-app-id-here")
+    static let sharedInstance = EverliveApp(appId: "ff4aiv2z6z2ireet")
     static var currentUser:User? = nil
     private init() {}
 }

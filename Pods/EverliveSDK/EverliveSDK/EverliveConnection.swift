@@ -74,7 +74,7 @@ public class EverliveConnection {
         let defaults = NSUserDefaults.standardUserDefaults()
         if let data = defaults.objectForKey(self.tokenKey) as? NSData {
             let tokenDict = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? [String:AnyObject]
-            var accessToken = AccessToken(dictionary: tokenDict!)
+            let accessToken = AccessToken(dictionary: tokenDict!)
             self.accessToken = accessToken
         }
     }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2109582A1CE87BB600F22A4A /* AddNewActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210958291CE87BB600F22A4A /* AddNewActivityViewController.swift */; };
+		218887B51D2985D9009C7367 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 218887B41D2985D9009C7367 /* CoreLocation.framework */; };
 		21A6E0E61CF8833200F39E7B /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A6E0E51CF8833200F39E7B /* CommentsViewController.swift */; };
 		21A6E0E81CF8854200F39E7B /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A6E0E71CF8854200F39E7B /* CommentTableViewCell.swift */; };
 		21A6E0EA1CF8867400F39E7B /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A6E0E91CF8867400F39E7B /* Comment.swift */; };
@@ -40,6 +41,7 @@
 
 /* Begin PBXFileReference section */
 		210958291CE87BB600F22A4A /* AddNewActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewActivityViewController.swift; sourceTree = "<group>"; };
+		218887B41D2985D9009C7367 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		21A6E0E51CF8833200F39E7B /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
 		21A6E0E71CF8854200F39E7B /* CommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		21A6E0E91CF8867400F39E7B /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				218887B51D2985D9009C7367 /* CoreLocation.framework in Frameworks */,
 				C38A7BC1832FE3DAAA603909 /* Pods_EverliveSwiftSDK_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -166,6 +169,7 @@
 		F56D8B4BEB55E2B2CD55E850 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				218887B41D2985D9009C7367 /* CoreLocation.framework */,
 				B96CBEA3BC3BD6BE51DD10D1 /* Pods_EverliveSwiftSDK_Example.framework */,
 			);
 			name = Frameworks;

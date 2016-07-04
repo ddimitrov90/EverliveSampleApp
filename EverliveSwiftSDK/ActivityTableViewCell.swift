@@ -8,6 +8,7 @@
 
 import UIKit
 import Kingfisher
+import CoreLocation
 
 class ActivityTableViewCell: UITableViewCell {
     @IBOutlet weak var usernameLabel: UILabel!
@@ -16,6 +17,7 @@ class ActivityTableViewCell: UITableViewCell {
     @IBOutlet weak var activityPicture: UIImageView!
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var addressLabel: UILabel!
     
     weak var delegate: CellDelegate?
     var cellIndex: Int?
@@ -48,6 +50,20 @@ class ActivityTableViewCell: UITableViewCell {
         self.usernameLabel.text = activity.UserProfile?.DisplayName
         self.activityTextLabel.text = activity.Text
         //self.activityTimestampLabel.text = activity.CreatedAt
+        
+        if let activityLocation = activity.Location {
+            let location = CLLocation(latitude: activityLocation.Latitude, longitude: activityLocation.Longitude)
+            
+            CLGeocoder().reverseGeocodeLocation(location, completionHandler: {(placemarks, error) -> Void in
+                if let pmarks = placemarks where pmarks.count > 0 {
+                    let pm = pmarks[0] as CLPlacemark
+                    self.addressLabel.text = "@" + pm.locality!
+                }
+                else {
+                    print("Problem with the data received from geocoder")
+                }
+            })
+        }
         
         self.activityPicture.kf_setImageWithURL(NSURL(string: activity.ActivityPic!.Uri!)!)
         self.profilePicture.kf_setImageWithURL(NSURL(string: activity.UserProfile!.ProfilePicture!.Uri!)!)

@@ -597,10 +597,16 @@ final public class EVReflection {
                 print("WARNING: An object with a property of type Array with optional objects should implement the EVArrayConvertable protocol. type = \(valueType) for key \(key)")
                 return (NSNull(), "NSNull", false)
             }
+        } else if mi.displayStyle == .Dictionary {
+            valueType = "\(mi.subjectType)"
+            if let dictionaryConverter = parentObject as? EVObject {
+                let convertedValue = dictionaryConverter.convertDictionary(key!, dict: theValue)
+                return (convertedValue, valueType, false)
+            }
         } else if mi.displayStyle == .Struct {
             valueType = "\(mi.subjectType)"
             if valueType.containsString("_NativeDictionaryStorage") {
-                if let dictionaryConverter = parentObject as? EVDictionaryConvertable {
+                if let dictionaryConverter = parentObject as? EVObject {
                     let convertedValue = dictionaryConverter.convertDictionary(key!, dict: theValue)
                     return (convertedValue, valueType, false)
                 }
@@ -728,15 +734,13 @@ final public class EVReflection {
             anyObject.setValue(value, forUndefinedKey: key)
         } else {
             if !valid {
-                (anyObject as? EVObject)?.addStatusMessage(.InvalidType, message: "\(anyObject.dynamicType) `\(key)` type, `\(type), doesn't match expected type.")
-                print("WARNING: \(anyObject.dynamicType) `\(key)` type, `\(type), doesn't match expected type.")
                 anyObject.setValue(theValue, forUndefinedKey: key)
                 return
             }
             
             // Call your own object validators that comply to the format: validate<Key>:Error:
             do {
-               var setValue: AnyObject? = value
+                var setValue: AnyObject? = value
                 try anyObject.validateValue(&setValue, forKey: key)
                 anyObject.setValue(setValue, forKey: key)
             } catch _ {
@@ -931,7 +935,7 @@ final public class EVReflection {
                     array.append(dictValue as? NSDictionary ?? NSDictionary())
                     dictValue = dictArrayToObjectArray(type, array: array, conversionOptions: conversionOptions) as NSArray
                 }
-            } else if let _ = type.rangeOfString("_NativeDictionaryStorageOwner"), let dict = dictValue as? NSDictionary, let org = anyObject as? EVDictionaryConvertable {
+            } else if let _ = type.rangeOfString("_NativeDictionaryStorageOwner"), let dict = dictValue as? NSDictionary, let org = anyObject as? EVObject {
                 dictValue = org.convertDictionary(key, dict: dict)
             } else if type != "NSDictionary" && dictValue as? NSDictionary != nil {
                 let (dict, isValid) = dictToObject(type, original: original, dict: dictValue as? NSDictionary ?? NSDictionary(), conversionOptions: conversionOptions)
@@ -962,11 +966,13 @@ final public class EVReflection {
      */
     private class func dictToObject<T where T:NSObject>(type: String, original: T?, dict: NSDictionary, conversionOptions: ConversionOptions = .DefaultDeserialize) -> (T?, Bool) {
         if var returnObject = original {
-            if returnObject is EVObject {
+            if type != "NSNumber" && type != "NSString" && type != "NSDate" && type.containsString("Dictionary<") == false {
                 returnObject = setPropertiesfromDictionary(dict, anyObject: returnObject, conversionOptions: conversionOptions)
             } else {
-                (original as? EVObject)?.addStatusMessage(.InvalidClass, message: "Cannot set values on type \(type) from dictionary \(dict)")
-                print("WARNING: Cannot set values on type \(type) from dictionary \(dict)")
+                if type.containsString("Dictionary<") == false {
+                    (original as? EVObject)?.addStatusMessage(.InvalidClass, message: "Cannot set values on type \(type) from dictionary \(dict)")
+                    print("WARNING: Cannot set values on type \(type) from dictionary \(dict)")
+                }
                 return (returnObject, false)
             }
 
@@ -981,10 +987,7 @@ final public class EVReflection {
             return (returnObject as? T, true)
         }
         
-        if type == "Struct" {
-            (original as? EVObject)?.addStatusMessage(.InvalidClass, message: "Structs should be handled with 'setvalue forUndefinedKey'\ndict:\(dict)")
-            print("WARNING: Structs should be handled with 'setvalue forUndefinedKey'\ndict:\(dict)")
-        } else {
+        if type != "Struct" {
             (original as? EVObject)?.addStatusMessage(.InvalidClass, message: "Could not create an instance for type \(type)\ndict:\(dict)")
             print("ERROR: Could not create an instance for type \(type)\ndict:\(dict)")
         }

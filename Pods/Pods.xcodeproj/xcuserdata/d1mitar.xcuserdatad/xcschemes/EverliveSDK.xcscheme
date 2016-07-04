@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'A478C6138BC23EC1D20BA2B5C550A02D'
+               BlueprintIdentifier = '907F8C00A8EBED4CA2EE90C0509C654F'
                BlueprintName = 'EverliveSDK'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'EverliveSDK.framework'>
